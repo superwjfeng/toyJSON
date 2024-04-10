@@ -7,6 +7,7 @@
 
 namespace wjfeng {
 namespace json {
+#define EPSILON 0.00001
 class Json {
  public:
   // 用枚举类型来定义json的数据类型
@@ -47,9 +48,34 @@ class Json {
   Json(const Json &other);
 
   void operator=(const Json &other);
+  bool operator==(const Json &other);
+  bool operator!=(const Json &other);
+  
 
   void copy(const Json &other);
   void clear();
+  
+
+  using std::vector<Json>::iterator = iterator;
+  iterator begin() {
+    return m_value.m_array->begin();
+  }
+  iterator end() {
+    return m_value.m_array->end();
+  }
+
+  bool isNull() const { return m_type == json_null; }
+  bool isBool() const { return m_type == json_bool; }
+  bool isInt() const { return m_type == json_int; }
+  bool isDouble() const { return m_type == json_double; }
+  bool isString() const { return m_type == json_string; }
+  bool isArray() const { return m_type == json_array; }
+  bool isObject() const { return m_type == json_object; }
+
+  bool asBool() const;
+  int asInt() const;
+  double asDouble() const;
+  std::string asString() const;
 
  public:
   operator bool();

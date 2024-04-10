@@ -48,10 +48,26 @@ void test3() {
   std::cout << obj.str() << std::endl;
 }
 
+void test4() {
+  JSON arr;
+  arr[0] = true;
+  arr[1] = 123;
+  arr[2] = 1.23;
+  arr[3] = "hello world";
+
+  for (auto it = arr.begin(); it != arr.end(); ++it) {
+    std::cout << (*it).str() << std::endl;
+  }
+
+  std::cout << arr.has(0) << std::endl;
+  std::cout << arr.has(4) << std::endl;
+}
+
 int main() {
   test1();
   test2();
   test3();
+  test4();
 
   std::cout << "test toyJSON" << std::endl;
   return 0;
